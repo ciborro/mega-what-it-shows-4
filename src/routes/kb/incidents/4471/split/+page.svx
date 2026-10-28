@@ -1,8 +1,8 @@
 ---
 layout: runbook
-title: '#4471 · one ticket, three problems'
+title: '#4471 · two filed causes'
 owner: ciborro
-status: known
+status: proposed
 reviewed: 2026-10-28
 signature: v1.eyJzdWIiOiIyODYiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5MzE3NjM4NiwiZXhwIjoxNzkzMjYyNzg2fQ.j79rU9MDnSB-khljI1hi5X2SErN8lyOdgl7BDHodlxg
 ---
@@ -19,22 +19,22 @@ subject line alone ([decision 0001](/kb/decisions/0001-dedupe-by-subject)), and 
 subject that more than one bug produces.
 
 <Callout kind="warn">
-The fix queued for #4471 is the parser fix. It does nothing for the <code>hint</code> reports or the
-one-day moves: they now have their own tickets.
+The fix queued for #4471 is the parser fix. It does nothing for the <code>hint</code> reports: they
+now have their own ticket.
 </Callout>
 
 ## What #4471 holds
 
 <CauseTable ticket={4471} />
 
-The table is the desk's own view, built from the export when the page renders. It shows three
-problems, and each now has a ticket:
+Original desk view, export of 2026-10-04. The table shows two causes, and each now has a ticket:
 
-- the `parser` row, without the reports in its footnote → [#1 parser reads day-first dates month first](https://github.com/ciborro/mega-what-it-shows-4/issues/1)
-- the `hint` row, "no ticket of its own" until now → [#2 booking form hint tells day-first tenants to type month first](https://github.com/ciborro/mega-what-it-shows-4/issues/2)
-- the footnote, the reports read as a one-day move → [#3 one-day move, read by the desk as not a swap](https://github.com/ciborro/mega-what-it-shows-4/issues/3)
+- the `parser` row, with the reports in its footnote → [#1 Shared date parser reads day-first dates month first](https://github.com/ciborro/mega-what-it-shows-4/issues/1)
+- the `hint` row, "no ticket of its own" in the export, which predates #2 → [#2 booking-v3 form gives day-first tenants an MM/DD/YYYY hint](https://github.com/ciborro/mega-what-it-shows-4/issues/2)
 
-Each ticket states how many reports it covers, counted as the table counts them.
+The footnote is an annotation inside `parser`, not a third cause and not extra reports: those reports
+stay counted where they are filed. Their bodies describe a one-day move, not a swap; the desk should
+check them when the parser fix ships.
 
 ## What each problem is
 
@@ -44,10 +44,6 @@ swapped: 7 April becomes 4 July.
 **`hint`** — `booking-v3` prints `MM/DD/YYYY` under its date field. People type month first, as told,
 and the form reads the value the tenant's way. Same symptom as `parser`, different code, different
 fix.
-
-**one-day move** — the reports in the table's footnote (`desk-notes.json`). They are not a day/month
-swap: a date moved by one day, or different days in different time zones. The table files them under
-`parser` by tenant, but the parser fix will not touch them.
 
 ## For the desk
 
